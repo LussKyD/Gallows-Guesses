@@ -8,7 +8,7 @@
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Quicksand:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Quicksand:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,17 +16,21 @@
 <div class="stage">
 
   <header class="topbar">
-    <div class="brand">
-      <span class="brand__tent">🎪</span>
+    <button id="homeLink" class="brand" type="button" aria-label="Back to home">
       <h1 class="brand__title">Gallows &amp; Guesses</h1>
-    </div>
-    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
-      <span class="theme-toggle__track">
-        <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">☀️</span>
-        <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">🌙</span>
-        <span class="theme-toggle__thumb"></span>
-      </span>
     </button>
+    <div class="topbar__controls">
+      <button id="soundToggle" class="icon-toggle" type="button" aria-pressed="true" aria-label="Mute sound">
+        <span class="icon-toggle__glyph" aria-hidden="true">♪</span>
+      </button>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <span class="theme-toggle__track">
+          <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">☀️</span>
+          <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">🌙</span>
+          <span class="theme-toggle__thumb"></span>
+        </span>
+      </button>
+    </div>
   </header>
 
   <!-- SCREEN 1: category picker -->
@@ -34,6 +38,7 @@
     <p class="eyebrow">Step right up</p>
     <h2 id="pickerHeading">Pick your category</h2>
     <p class="picker__sub">Six wrong guesses is all the rope you get.</p>
+    <div id="streakRow" class="streak-row" aria-live="polite"></div>
     <div id="categoryGrid" class="category-grid" role="list"></div>
   </section>
 
@@ -44,6 +49,8 @@
       <button id="backBtn" class="link-btn" type="button">&larr; Change category</button>
       <h2 id="gameHeading" class="game__category">Category</h2>
     </div>
+
+    <p id="clueText" class="clue-text"></p>
 
     <div class="game__layout">
 
