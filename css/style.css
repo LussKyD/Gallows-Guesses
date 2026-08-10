@@ -17,6 +17,18 @@
   --success: #4F8F5B;
   --line: #D8C6A3;
   --shadow: 0 10px 30px -12px rgba(46, 33, 20, 0.35);
+
+  /* Colosseum scene — bright daytime */
+  --sky-top: #5EB9EA;
+  --sky-bottom: #C7E9F9;
+  --sun-glow: #FFE9A8;
+  --sun-core: #FFF6D6;
+  --stone-outer: #A9754F;
+  --stone-mid: #C99A66;
+  --stone-inner: #E4C48D;
+  --arch-shadow: #4A2F1D;
+  --floor-sand: #E7C68F;
+  --floor-crack: #B98F5E;
 }
 
 [data-theme="dark"] {
@@ -32,6 +44,18 @@
   --success: #79E8AB;
   --line: #3C2E58;
   --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+
+  /* Colosseum scene — torchlit dusk */
+  --sky-top: #120C26;
+  --sky-bottom: #3A2657;
+  --sun-glow: #FFB454;
+  --sun-core: #FFE3AE;
+  --stone-outer: #3C2C4C;
+  --stone-mid: #4E3A61;
+  --stone-inner: #644B79;
+  --arch-shadow: #120B1C;
+  --floor-sand: #4A3654;
+  --floor-crack: #2E2140;
 }
 
 * { box-sizing: border-box; }
@@ -315,7 +339,9 @@ h1, h2 {
   position: relative;
   width: 100%;
   max-width: 300px;
-  aspect-ratio: 300 / 370;
+  aspect-ratio: 300 / 400;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .arena-bg,
@@ -331,18 +357,38 @@ h1, h2 {
 
 /* Arena scene */
 
-.arena-floor {
-  fill: color-mix(in srgb, var(--accent) 22%, var(--surface));
+.sun-glow {
+  fill: var(--sun-glow);
+  opacity: 0.55;
 }
 
-.arena-wall {
-  fill: var(--surface-raised);
-  stroke: var(--line);
-  stroke-width: 2;
+.sun-core {
+  fill: var(--sun-core);
+  opacity: 0.9;
+}
+
+.band {
+  stroke: none;
+}
+
+.band--outer { fill: var(--stone-outer); }
+.band--mid   { fill: var(--stone-mid); }
+.band--inner { fill: var(--stone-inner); }
+
+.arch {
+  fill: var(--arch-shadow);
+  opacity: 0.75;
 }
 
 .arena-tier {
-  stroke: var(--line);
+  stroke: var(--arch-shadow);
+  stroke-width: 1.5;
+  opacity: 0.4;
+}
+
+.arena-wall {
+  fill: var(--stone-inner);
+  stroke: var(--arch-shadow);
   stroke-width: 1.5;
 }
 
@@ -360,21 +406,19 @@ h1, h2 {
   fill: var(--ink-soft);
 }
 
-.crowd-fig circle {
-  stroke: none;
+.crowd-dot.crowd-cheer { fill: var(--danger); }
+.crowd-dot.crowd-mercy { fill: var(--success); }
+
+.arena-floor {
+  fill: var(--floor-sand);
 }
 
-.crowd-arms {
+.floor-crack {
+  stroke: var(--floor-crack);
+  stroke-width: 1.2;
   fill: none;
-  stroke-width: 1.5;
-  stroke-linecap: round;
+  opacity: 0.6;
 }
-
-.crowd-cheer circle { fill: var(--danger); }
-.crowd-cheer .crowd-arms { stroke: var(--danger); }
-
-.crowd-mercy circle { fill: var(--success); }
-.crowd-mercy .crowd-arms { stroke: var(--success); }
 
 .rig {
   stroke: var(--ink-soft);
