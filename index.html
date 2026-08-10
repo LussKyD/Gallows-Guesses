@@ -55,30 +55,87 @@
     <div class="game__layout">
 
       <div class="gallows-pane">
-        <svg id="gallowsSvg" class="gallows" viewBox="0 0 300 340" role="img" aria-label="Gallows drawing showing wrong guess progress">
-          <!-- static rig -->
-          <line class="rig" x1="30" y1="320" x2="150" y2="320" />
-          <line class="rig" x1="60" y1="320" x2="60" y2="30" />
-          <line class="rig" x1="60" y1="30" x2="190" y2="30" />
-          <!-- rope: swings via .rope-swing class on wrong guess -->
-          <g id="ropeGroup" class="rope-group">
-            <line id="rope" class="rope" x1="190" y1="30" x2="190" y2="65" />
-          </g>
-          <!-- figure parts, each starts hidden via stroke-dasharray trick -->
-          <g id="figure" class="figure">
-            <circle id="partHead" class="part part--head" cx="190" cy="85" r="20"/>
-            <g id="faceNeutral" class="face">
-              <circle class="eye" cx="183" cy="82" r="2"/>
-              <circle class="eye" cx="197" cy="82" r="2"/>
-              <path id="mouth" class="mouth" d="M 182 91 Q 190 91 198 91" />
+        <div class="arena">
+          <svg class="arena-bg" viewBox="0 -30 300 370" aria-hidden="true">
+            <!-- sand floor -->
+            <ellipse class="arena-floor" cx="150" cy="325" rx="145" ry="16"/>
+
+            <!-- left grandstand -->
+            <rect class="arena-wall" x="0" y="50" width="62" height="270" rx="14"/>
+            <line class="arena-tier" x1="4" y1="115" x2="58" y2="115"/>
+            <line class="arena-tier" x1="4" y1="180" x2="58" y2="180"/>
+            <line class="arena-tier" x1="4" y1="245" x2="58" y2="245"/>
+
+            <!-- right grandstand -->
+            <rect class="arena-wall" x="238" y="50" width="62" height="270" rx="14"/>
+            <line class="arena-tier" x1="242" y1="115" x2="296" y2="115"/>
+            <line class="arena-tier" x1="242" y1="180" x2="296" y2="180"/>
+            <line class="arena-tier" x1="242" y1="245" x2="296" y2="245"/>
+
+            <!-- royal box, top center -->
+            <polygon class="arena-wall" points="150,-28 112,-2 188,-2"/>
+            <rect class="arena-wall" x="95" y="-2" width="110" height="30" rx="10"/>
+            <g class="royal-figure">
+              <polygon class="royal-crown" points="150,-14 145,-6 155,-6"/>
+              <circle cx="150" cy="0" r="6"/>
+              <path d="M 138 20 Q 150 8 162 20 L 162 26 L 138 26 Z"/>
             </g>
-            <line id="partTorso" class="part part--torso" x1="190" y1="105" x2="190" y2="180"/>
-            <line id="partArmL" class="part part--armL" x1="190" y1="120" x2="160" y2="150"/>
-            <line id="partArmR" class="part part--armR" x1="190" y1="120" x2="220" y2="150"/>
-            <line id="partLegL" class="part part--legL" x1="190" y1="180" x2="165" y2="215"/>
-            <line id="partLegR" class="part part--legR" x1="190" y1="180" x2="215" y2="215"/>
-          </g>
-        </svg>
+            <g class="royal-attendant">
+              <circle cx="122" cy="4" r="4"/>
+              <path d="M 116 18 Q 122 10 128 18 Z"/>
+            </g>
+            <g class="royal-attendant">
+              <circle cx="178" cy="4" r="4"/>
+              <path d="M 172 18 Q 178 10 184 18 Z"/>
+            </g>
+
+            <!-- crowd: mixed reactions, some cheering for death, some against -->
+            <g class="crowd-fig crowd-cheer" transform="translate(20,85)"><circle r="4"/><path d="M -4 3 L 0 0 L 4 3" class="crowd-arms"/></g>
+            <g class="crowd-fig crowd-mercy" transform="translate(45,85)"><circle r="4"/><path d="M -4 8 L 0 3 L 4 8" class="crowd-arms"/></g>
+            <g class="crowd-fig crowd-mercy" transform="translate(255,85)"><circle r="4"/><path d="M -4 8 L 0 3 L 4 8" class="crowd-arms"/></g>
+            <g class="crowd-fig crowd-cheer" transform="translate(280,85)"><circle r="4"/><path d="M -4 3 L 0 0 L 4 3" class="crowd-arms"/></g>
+
+            <g class="crowd-fig crowd-mercy" transform="translate(20,150)"><circle r="4"/><path d="M -4 8 L 0 3 L 4 8" class="crowd-arms"/></g>
+            <g class="crowd-fig crowd-cheer" transform="translate(45,150)"><circle r="4"/><path d="M -4 3 L 0 0 L 4 3" class="crowd-arms"/></g>
+            <g class="crowd-fig crowd-cheer" transform="translate(255,150)"><circle r="4"/><path d="M -4 3 L 0 0 L 4 3" class="crowd-arms"/></g>
+            <g class="crowd-fig crowd-cheer" transform="translate(280,150)"><circle r="4"/><path d="M -4 3 L 0 0 L 4 3" class="crowd-arms"/></g>
+
+            <g class="crowd-fig crowd-cheer" transform="translate(20,215)"><circle r="4"/><path d="M -4 3 L 0 0 L 4 3" class="crowd-arms"/></g>
+            <g class="crowd-fig crowd-cheer" transform="translate(45,215)"><circle r="4"/><path d="M -4 3 L 0 0 L 4 3" class="crowd-arms"/></g>
+            <g class="crowd-fig crowd-mercy" transform="translate(255,215)"><circle r="4"/><path d="M -4 8 L 0 3 L 4 8" class="crowd-arms"/></g>
+            <g class="crowd-fig crowd-mercy" transform="translate(280,215)"><circle r="4"/><path d="M -4 8 L 0 3 L 4 8" class="crowd-arms"/></g>
+
+            <g class="crowd-fig crowd-mercy" transform="translate(20,280)"><circle r="4"/><path d="M -4 8 L 0 3 L 4 8" class="crowd-arms"/></g>
+            <g class="crowd-fig crowd-cheer" transform="translate(45,280)"><circle r="4"/><path d="M -4 3 L 0 0 L 4 3" class="crowd-arms"/></g>
+            <g class="crowd-fig crowd-cheer" transform="translate(255,280)"><circle r="4"/><path d="M -4 3 L 0 0 L 4 3" class="crowd-arms"/></g>
+            <g class="crowd-fig crowd-mercy" transform="translate(280,280)"><circle r="4"/><path d="M -4 8 L 0 3 L 4 8" class="crowd-arms"/></g>
+          </svg>
+
+          <svg id="gallowsSvg" class="gallows" viewBox="0 -30 300 370" role="img" aria-label="Gallows drawing showing wrong guess progress, standing in the middle of an arena with a divided crowd watching">
+            <!-- static rig -->
+            <line class="rig" x1="30" y1="320" x2="150" y2="320" />
+            <line class="rig" x1="60" y1="320" x2="60" y2="30" />
+            <line class="rig" x1="60" y1="30" x2="190" y2="30" />
+            <!-- rope: swings via .rope-swing class on wrong guess -->
+            <g id="ropeGroup" class="rope-group">
+              <line id="rope" class="rope" x1="190" y1="30" x2="190" y2="65" />
+            </g>
+            <!-- figure parts, each starts hidden via stroke-dasharray trick -->
+            <g id="figure" class="figure">
+              <circle id="partHead" class="part part--head" cx="190" cy="85" r="20"/>
+              <g id="faceNeutral" class="face">
+                <circle class="eye" cx="183" cy="82" r="2"/>
+                <circle class="eye" cx="197" cy="82" r="2"/>
+                <path id="mouth" class="mouth" d="M 182 91 Q 190 91 198 91" />
+              </g>
+              <line id="partTorso" class="part part--torso" x1="190" y1="105" x2="190" y2="180"/>
+              <line id="partArmL" class="part part--armL" x1="190" y1="120" x2="160" y2="150"/>
+              <line id="partArmR" class="part part--armR" x1="190" y1="120" x2="220" y2="150"/>
+              <line id="partLegL" class="part part--legL" x1="190" y1="180" x2="165" y2="215"/>
+              <line id="partLegR" class="part part--legR" x1="190" y1="180" x2="215" y2="215"/>
+            </g>
+          </svg>
+        </div>
 
         <div class="vitals">
           <div class="lives" id="livesRow" aria-live="polite"></div>
