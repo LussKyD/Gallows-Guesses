@@ -311,10 +311,70 @@ h1, h2 {
   gap: 16px;
 }
 
-.gallows {
+.arena {
+  position: relative;
   width: 100%;
   max-width: 300px;
+  aspect-ratio: 300 / 370;
 }
+
+.arena-bg,
+.gallows {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.arena-bg { z-index: 0; }
+.gallows { z-index: 1; }
+
+/* Arena scene */
+
+.arena-floor {
+  fill: color-mix(in srgb, var(--accent) 22%, var(--surface));
+}
+
+.arena-wall {
+  fill: var(--surface-raised);
+  stroke: var(--line);
+  stroke-width: 2;
+}
+
+.arena-tier {
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.royal-figure circle,
+.royal-figure path {
+  fill: var(--accent-2);
+}
+
+.royal-crown {
+  fill: var(--accent);
+}
+
+.royal-attendant circle,
+.royal-attendant path {
+  fill: var(--ink-soft);
+}
+
+.crowd-fig circle {
+  stroke: none;
+}
+
+.crowd-arms {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.crowd-cheer circle { fill: var(--danger); }
+.crowd-cheer .crowd-arms { stroke: var(--danger); }
+
+.crowd-mercy circle { fill: var(--success); }
+.crowd-mercy .crowd-arms { stroke: var(--success); }
 
 .rig {
   stroke: var(--ink-soft);
