@@ -59,7 +59,7 @@ body {
 }
 
 h1, h2 {
-  font-family: 'Chewy', cursive;
+  font-family: 'Black Ops One', 'Quicksand', sans-serif;
   font-weight: 400;
   margin: 0;
 }
@@ -78,20 +78,56 @@ h1, h2 {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.brand__tent {
-  font-size: 1.8rem;
-  transform: translateY(-2px);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  text-align: left;
 }
 
 .brand__title {
-  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-size: clamp(1.3rem, 4vw, 1.9rem);
   color: var(--accent-2);
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
-/* Theme toggle */
+.brand:hover .brand__title,
+.brand:focus-visible .brand__title {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.topbar__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Sound + theme toggles */
+
+.icon-toggle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--surface-raised);
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.icon-toggle[aria-pressed="false"] {
+  opacity: 0.45;
+}
+
+.icon-toggle:hover {
+  border-color: var(--accent);
+}
 
 .theme-toggle {
   background: none;
@@ -161,7 +197,28 @@ h1, h2 {
 
 .picker__sub {
   color: var(--ink-soft);
-  margin: 8px 0 28px;
+  margin: 8px 0 20px;
+}
+
+.streak-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+}
+
+.streak-row strong {
+  color: var(--accent);
+}
+
+.clue-text {
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: -8px 0 16px;
+  font-size: 0.95rem;
 }
 
 /* Category cards */
@@ -190,12 +247,6 @@ h1, h2 {
   border-color: var(--accent);
   box-shadow: var(--shadow);
   outline: none;
-}
-
-.category-card__icon {
-  font-size: 1.8rem;
-  display: block;
-  margin-bottom: 10px;
 }
 
 .category-card__name {
@@ -465,8 +516,8 @@ h1, h2 {
   border: none;
   border-radius: 12px;
   padding: 12px 24px;
-  font-family: 'Chewy', cursive;
-  font-size: 1.1rem;
+  font-family: 'Black Ops One', 'Quicksand', sans-serif;
+  font-size: 1rem;
   cursor: pointer;
   box-shadow: var(--shadow);
   transition: transform 0.15s ease;
