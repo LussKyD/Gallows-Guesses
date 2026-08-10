@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallows &amp; Guesses — A Hangman Game</title>
+<meta name="description" content="A playful browser Hangman game with category picks, dark/light mode, and an animated gallows.">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Quicksand:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="stage">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand__tent">🎪</span>
+      <h1 class="brand__title">Gallows &amp; Guesses</h1>
+    </div>
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+      <span class="theme-toggle__track">
+        <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">☀️</span>
+        <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">🌙</span>
+        <span class="theme-toggle__thumb"></span>
+      </span>
+    </button>
+  </header>
+
+  <!-- SCREEN 1: category picker -->
+  <section id="pickerScreen" class="screen picker" aria-labelledby="pickerHeading">
+    <p class="eyebrow">Step right up</p>
+    <h2 id="pickerHeading">Pick your category</h2>
+    <p class="picker__sub">Six wrong guesses is all the rope you get.</p>
+    <div id="categoryGrid" class="category-grid" role="list"></div>
+  </section>
+
+  <!-- SCREEN 2: game -->
+  <section id="gameScreen" class="screen game" aria-labelledby="gameHeading" hidden>
+
+    <div class="game__top">
+      <button id="backBtn" class="link-btn" type="button">&larr; Change category</button>
+      <h2 id="gameHeading" class="game__category">Category</h2>
+    </div>
+
+    <div class="game__layout">
+
+      <div class="gallows-pane">
+        <svg id="gallowsSvg" class="gallows" viewBox="0 0 300 340" role="img" aria-label="Gallows drawing showing wrong guess progress">
+          <!-- static rig -->
+          <line class="rig" x1="30" y1="320" x2="150" y2="320" />
+          <line class="rig" x1="60" y1="320" x2="60" y2="30" />
+          <line class="rig" x1="60" y1="30" x2="190" y2="30" />
+          <!-- rope: swings via .rope-swing class on wrong guess -->
+          <g id="ropeGroup" class="rope-group">
+            <line id="rope" class="rope" x1="190" y1="30" x2="190" y2="65" />
+          </g>
+          <!-- figure parts, each starts hidden via stroke-dasharray trick -->
+          <g id="figure" class="figure">
+            <circle id="partHead" class="part part--head" cx="190" cy="85" r="20"/>
+            <g id="faceNeutral" class="face">
+              <circle class="eye" cx="183" cy="82" r="2"/>
+              <circle class="eye" cx="197" cy="82" r="2"/>
+              <path id="mouth" class="mouth" d="M 182 91 Q 190 91 198 91" />
+            </g>
+            <line id="partTorso" class="part part--torso" x1="190" y1="105" x2="190" y2="180"/>
+            <line id="partArmL" class="part part--armL" x1="190" y1="120" x2="160" y2="150"/>
+            <line id="partArmR" class="part part--armR" x1="190" y1="120" x2="220" y2="150"/>
+            <line id="partLegL" class="part part--legL" x1="190" y1="180" x2="165" y2="215"/>
+            <line id="partLegR" class="part part--legR" x1="190" y1="180" x2="215" y2="215"/>
+          </g>
+        </svg>
+
+        <div class="vitals">
+          <div class="lives" id="livesRow" aria-live="polite"></div>
+          <p class="wrong-letters">Missed: <span id="wrongLetters">—</span></p>
+        </div>
+      </div>
+
+      <div class="play-pane">
+        <div id="wordRow" class="word-row" aria-live="polite"></div>
+
+        <p id="statusMsg" class="status-msg" role="status" aria-live="assertive">&nbsp;</p>
+
+        <div id="keyboard" class="keyboard"></div>
+
+        <button id="playAgainBtn" class="primary-btn" type="button" hidden>Play again</button>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Built for the crowd. No actual rope was harmed.</p>
+  </footer>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
